@@ -9,32 +9,37 @@ public static class SeedData
 {
     public static void Initialize(IServiceProvider serviceProvider)
     {
-        using (var _context = new appDbContext(
-                   serviceProvider.GetRequiredService<DbContextOptions<appDbContext>>()))
-        {
-            _context.Database.EnsureDeleted(); // Clear the database
-            _context.Database.EnsureCreated(); // Create the database if not exists
+        using var _context = new AppDbContext(
+            serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>());
+        _context.Database.EnsureDeleted(); // Clear the database
+        _context.Database.EnsureCreated(); // Create the database if not exists
 
-            // Generate dummy customers
-            var customerFaker = new Faker<Product>()
-                .RuleFor(customer => customer.Name, f => f.Name.FullName())
-                .RuleFor(customer => customer.Email, f => f.Internet.Email())
-                .RuleFor(customer => customer.Phone, f => f.Phone.PhoneNumber());
-
-            var customers = customerFaker.Generate(10); 
-            _context.AddRange(customers);
-            _context.SaveChanges(); 
-
-        
-            /*var addressFaker = new Faker<Address>()
-                .RuleFor(address => address.StreetName, f => f.Address.StreetName())
-                .RuleFor(address => address.StreetNo, f => f.Random.Int().ToString())
-                .RuleFor(address => address.City, f => f.Address.City())
-                .RuleFor(address => address.CustomerId, f => f.PickRandom(customers).Id); 
-
-            var addresses = addressFaker.Generate(20); 
-            _context.Address.AddRange(addresses);
-            _context.SaveChanges();*/
-        }
+        var faker = new Faker<Product>();
+            
+        var productsCategory1 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
+            .RuleFor(product => product.Description, f => f.Lorem.Sentence())
+            .RuleFor(product => product.Price, f => f.Random.Int())
+            .RuleFor(product => product.Category, f => "Sports")
+            .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
+            .Generate(50);
+            
+        var productsCategory2 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
+            .RuleFor(product => product.Description, f => f.Lorem.Sentence())
+            .RuleFor(product => product.Price, f => f.Random.Int())
+            .RuleFor(product => product.Category, f => "Electronics")
+            .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
+            .Generate(50);
+            
+        var productsCategory3 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
+            .RuleFor(product => product.Description, f => f.Lorem.Sentence())
+            .RuleFor(product => product.Price, f => f.Random.Int())
+            .RuleFor(product => product.Category, f => "Clothing")
+            .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
+            .Generate(50);
+            
+        _context.AddRange(productsCategory1);
+        _context.AddRange(productsCategory2);
+        _context.AddRange(productsCategory3);
+        _context.SaveChanges();
     }
 }

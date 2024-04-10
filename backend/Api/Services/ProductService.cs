@@ -22,7 +22,7 @@ public class ProductService(AppDbContext context) : IProductService
         throw new NotImplementedException();
     }
 
-    public async Task<Product> CreateProduct(string name, string description, int price, string condition)
+    public async Task<Product> CreateProduct(string name, string description, int price, string condition,string category)
     {
         var product = new Product
         {
@@ -30,6 +30,7 @@ public class ProductService(AppDbContext context) : IProductService
             Description = description,
             Price = price,
             Condition = condition,
+            Category = category
         };
 
         context.Product.Add(product); // Add the product to the DbSet

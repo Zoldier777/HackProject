@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Data;
+using Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +13,13 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(AppDbContext context) : ControllerBase
+    public class ProductController(IProductService service) : ControllerBase
     {
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] int offset,[FromQuery] int number  )
         {
-            return await context.Product.ToListAsync();
+            return await service.GetXProductsByOffset(offset, number);
         }
 
         /*// GET: api/Product/5
