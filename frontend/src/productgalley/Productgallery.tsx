@@ -3,18 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Product from "../product/Product";
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    condition: string;
-    category: string;
-    postedAtDate: Date;
-}
-
-type Products = Product[];
-
 const ProductGallery = () => {
     const [pageOffset, setPageOffset] = useState<number>(0);
     const [searchParams] = useSearchParams();
@@ -22,9 +10,7 @@ const ProductGallery = () => {
     async function getItems(query_page: number, query_search: string): Promise<product[]> {
         const url = `http://localhost:5180/api/Product?offset=${query_page}&number=${6}`;
         const response = await fetch(url);
-        
         const json_response = await response.json();
-        console.log(json_response);
         const products = json_response as product[];
         return products;
     }
@@ -34,7 +20,7 @@ const ProductGallery = () => {
         isError,
         data: products,
     } = useQuery<product[], Error>({
-        queryKey: ['todos'],
+        queryKey: ['todos', pageOffset],
         queryFn: () => getItems(pageOffset, searchParams.get("search") ?? "news")
     });
 
