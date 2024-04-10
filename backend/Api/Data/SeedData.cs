@@ -1,6 +1,7 @@
 using Bogus;
 using Bogus.DataSets;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace Api.Data;
 
@@ -15,7 +16,7 @@ public static class SeedData
             _context.Database.EnsureCreated(); // Create the database if not exists
 
             // Generate dummy customers
-            var customerFaker = new Faker<Customer>()
+            var customerFaker = new Faker<Product>()
                 .RuleFor(customer => customer.Name, f => f.Name.FullName())
                 .RuleFor(customer => customer.Email, f => f.Internet.Email())
                 .RuleFor(customer => customer.Phone, f => f.Phone.PhoneNumber());
@@ -25,7 +26,7 @@ public static class SeedData
             _context.SaveChanges(); 
 
         
-            var addressFaker = new Faker<Address>()
+            /*var addressFaker = new Faker<Address>()
                 .RuleFor(address => address.StreetName, f => f.Address.StreetName())
                 .RuleFor(address => address.StreetNo, f => f.Random.Int().ToString())
                 .RuleFor(address => address.City, f => f.Address.City())
@@ -33,7 +34,7 @@ public static class SeedData
 
             var addresses = addressFaker.Generate(20); 
             _context.Address.AddRange(addresses);
-            _context.SaveChanges();
+            _context.SaveChanges();*/
         }
     }
 }

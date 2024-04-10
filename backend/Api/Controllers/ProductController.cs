@@ -16,12 +16,12 @@ namespace Api.Controllers
     {
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             return await context.Product.ToListAsync();
         }
 
-        // GET: api/Product/5
+        /*// GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -96,6 +96,6 @@ namespace Api.Controllers
         private bool ProductExists(int id)
         {
             return context.Product.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

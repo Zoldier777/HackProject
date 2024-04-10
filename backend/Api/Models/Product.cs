@@ -11,6 +11,5 @@ public class Product
     public required int Price { get; set; }
     public required string Description { get; set; }
     public string Condition { get; set; }
-    [DataType(DataType.Date)]
     public DateTime PostedAtDate { get; set; } = DateTime.Now;
 }
