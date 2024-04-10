@@ -1,19 +1,21 @@
 import Footer from './Footer'
-import Login from './login/Login'
 import Navbar from './Navbar'
-import Register from './register/Register'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Outlet } from "react-router-dom"
 
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <>
-      <Navbar/>
-        <Register/>
-      <Footer/>
+
+      <Navbar />
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+      <Footer />
     </>
   )
 }
 
 export default App
-
-

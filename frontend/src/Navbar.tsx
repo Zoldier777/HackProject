@@ -1,12 +1,12 @@
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 drop-shadow gap-1 sticky">
+        <div className="navbar bg-base-100 drop-shadow gap-1 justify-between sticky top-0 z-50">
             <div className="flex-initial">
                 <a className="btn btn-ghost text-xl">MarketSafe</a>
             </div>
-            <div className="flex-grow form-control">
+            {/* <div className="flex-grow form-control">
                 <input type="text" placeholder="Search" className="input input-bordered w-full" />
-            </div>
+            </div> */}
             <div className="flex-initial gap-1">
                 <div role="button" className="btn btn-ghost btn-circle avatar">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -30,7 +30,7 @@ const Navbar = () => {
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-l">Start Advertising</a>
+                <a className="btn btn-ghost text-l bg-yellow-300">Start Advertising</a>
             </div>
         </div>
     );

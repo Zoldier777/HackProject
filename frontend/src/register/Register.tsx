@@ -34,7 +34,7 @@ const Register = () => {
               })}
               className="w-full border-2 border-gray-300 rounded-lg p-2"
             />
-            <div className="absolute inset-0 border-2 border-gray-300 rounded-lg pointer-events-none"></div>
+            
           </div>
           {errors?.firstName?.type === "required" && <p>This field is required</p>}
           {errors?.firstName?.type === "maxLength" && (
@@ -48,11 +48,12 @@ const Register = () => {
           <label>Last Name</label>
           <div className="relative">
             <input
-              {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+              {...register("lastName", { required: true, pattern: /^[A-Za-z]+$/i })}
               className="w-full border-2 border-gray-300 rounded-lg p-2"
             />
             <div className="absolute inset-0 border-2 border-gray-300 rounded-lg pointer-events-none"></div>
           </div>
+          {errors?.lastName?.type === "required" && <p>This field is required</p>}
           {errors?.lastName?.type === "pattern" && (
             <p>Alphabetical characters only</p>
           )}
@@ -61,15 +62,19 @@ const Register = () => {
           <label>Age</label>
           <div className="relative">
             <input
-              {...register("age", { min: 18, max: 99 })}
+              {...register("age", { required: true, min: 18, max: 99 })}
               className="w-full border-2 border-gray-300 rounded-lg p-2"
             />
             <div className="absolute inset-0 border-2 border-gray-300 rounded-lg pointer-events-none"></div>
           </div>
-          {errors.age && (
+          {errors?.age?.type === "required" && <p>This field is required</p>}
+          {errors?.age && (
             <p>You must be older than 18 and younger than 99 years old</p>
           )}
         </div>
+
+        <input type="number" {...register("age", { min: 18, max: 99 })} />
+
         <input className="w-full bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit" />
       </form>
     </div>
