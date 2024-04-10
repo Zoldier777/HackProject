@@ -1,4 +1,4 @@
-/*using Bogus;
+using Bogus;
 using Bogus.DataSets;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,4 +36,4 @@ public static class SeedData
             _context.SaveChanges();
         }
     }
-}*/
+}

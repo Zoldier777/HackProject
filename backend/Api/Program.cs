@@ -1,6 +1,7 @@
+using Api.Data;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<appDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("appDbContext") ?? throw new InvalidOperationException("Connection string 'appDbContext' not found.")));
 
 // Add services to the container.
@@ -22,9 +23,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    /*using var scope = app.Services.CreateScope();
+    using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
-    SeedData.Initialize(services);*/
+    SeedData.Initialize(services);
 }
 
 app.UseHttpsRedirection();
