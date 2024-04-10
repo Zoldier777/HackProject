@@ -10,25 +10,31 @@ namespace Api.Controllers
     {
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] int offset,[FromQuery] int number  )
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] int offset,[FromQuery] int number, [FromQuery] string category  )
         {
-            return await service.GetNumberOfLatestProductsByOffset(offset, number);
+            return await service.GetNumberOfLatestProductsByOffset(offset, number, category);
+        }
+        [HttpGet("categories")] 
+        public async Task<ActionResult<IEnumerable<string>>> GetAllCategories()
+        {
+            return await service.GetAllProductCategories();
         }
 
-        /*// GET: api/Product/5
+
+        // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await context.Product.FindAsync(id);
+            var product = await service.GetProductByID(id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return Ok(product);
         }
-
+        /*
         // PUT: api/Product/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
