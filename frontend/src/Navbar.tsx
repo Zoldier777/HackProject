@@ -25,7 +25,7 @@ const Navbar = () => {
                     <input 
                         type="text" 
                         placeholder="Search" 
-                        className="input input-bordered w-full" 
+                        className="input input-bordered border-neutral-600	 w-full" 
                         value={searchQuery} 
                         onChange={(e) => setSearchQuery(e.target.value)} 
                         onKeyDown={handleKeyDown} 
