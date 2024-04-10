@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Api.Data;
 using Api.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Api.Controllers
@@ -19,7 +12,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] int offset,[FromQuery] int number  )
         {
-            return await service.GetXProductsByOffset(offset, number);
+            return await service.GetNumberOfLatestProductsByOffset(offset, number);
         }
 
         /*// GET: api/Product/5

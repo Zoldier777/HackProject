@@ -6,7 +6,7 @@ namespace Api.Services;
 
 public class ProductService(AppDbContext context) : IProductService
 {
-    public async Task<List<Product>> GetXProductsByOffset(int offset, int number)
+    public async Task<List<Product>> GetNumberOfLatestProductsByOffset(int offset, int number)
     {
         var products = await context.Product
             .OrderBy(p => p.PostedAtDate) 
