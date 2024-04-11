@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import Product from "../product/Product";
+import Footer from "../../Footer";
 
 const ProductGallery = () => {
   const [pageOffset, setPageOffset] = useState<number>(0);
 
   async function getItems(query_page: number): Promise<product[]> {
-    const url = `http://localhost:5180/api/Product?offset=${query_page}&number=${6}`;
+    const url = `http://localhost:5180/api/Product?offset=${query_page}&number=${6}&category=News`;
     const response = await fetch(url);
     const json_response = await response.json();
     const products = json_response as product[];
@@ -39,11 +40,11 @@ const ProductGallery = () => {
             ))}
         </div>
         <div className="flex justify-center gap-10 w-full pb-4" >
-            <button className="btn" onClick={() => setPageOffset((page) => Math.max(0, page - 5))}>Previous</button>
-            <button className="btn" onClick={() => setPageOffset((page) => Math.max(0, page + 5))}>Next</button>
+            <button className="btn" onClick={() => setPageOffset((page) => Math.max(0, page - 6))}>Previous</button>
+            <button className="btn" onClick={() => setPageOffset((page) => Math.max(0, page + 6))}>Next</button>
           </div>
         </div>
-        
+        <Footer/>
         </div>
         
        

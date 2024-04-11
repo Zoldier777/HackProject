@@ -5,13 +5,10 @@ const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
-    const handleSearch = () => {
-        navigate(`/?search=${searchQuery}`);
-    };
     const handleKeyDown = (e: any) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            handleSearch();
+            navigate(`/search?q=${searchQuery}`);
         }
     };
 
