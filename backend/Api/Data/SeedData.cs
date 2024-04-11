@@ -16,23 +16,23 @@ public static class SeedData
 
         var faker = new Faker<Product>();
             
-        var productsCategory1 = faker.RuleFor(product => product.Name, f => f.Name.FirstName())
+        var productsCategory1 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
             .RuleFor(product => product.Description, f => f.Lorem.Sentence())
-            .RuleFor(product => product.Price, f => f.Random.Int(0,1000))
+            .RuleFor(product => product.Price, f => f.Random.Int())
             .RuleFor(product => product.Category, f => "Sports")
             .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
             .Generate(50);
             
-        var productsCategory2 = faker.RuleFor(product => product.Name, f => f.Name.FirstName())
+        var productsCategory2 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
             .RuleFor(product => product.Description, f => f.Lorem.Sentence())
-            .RuleFor(product => product.Price, f => f.Random.Int(0,1000))
+            .RuleFor(product => product.Price, f => f.Random.Int())
             .RuleFor(product => product.Category, f => "Electronics")
             .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
             .Generate(50);
             
-        var productsCategory3 = faker.RuleFor(product => product.Name, f => f.Name.FirstName())
+        var productsCategory3 = faker.RuleFor(product => product.Name, f => f.Lorem.Word())
             .RuleFor(product => product.Description, f => f.Lorem.Sentence())
-            .RuleFor(product => product.Price, f => f.Random.Int(0,1000))
+            .RuleFor(product => product.Price, f => f.Random.Int())
             .RuleFor(product => product.Category, f => "Clothing")
             .RuleFor(product => product.Condition, f => f.Random.Bool() ? "Mint" : "Used")
             .Generate(50);

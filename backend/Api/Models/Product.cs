@@ -10,7 +10,7 @@ public class Product
     public required string Name { get; set; }
     public required int Price { get; set; }
     public required string Description { get; set; }
-    public required string Condition { get; set; }
-    public required string Category { get; set; }
+    public string Condition { get; set; }
+    public string Category { get; set; }
     public DateTime PostedAtDate { get; set; } = DateTime.Now;
 }
