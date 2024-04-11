@@ -21,17 +21,17 @@ const ProductDetail = () => {
 
   return (
     <>
-      <section className="flex justify-center items-center min-h-screen">
+      <section className="flex justify-center items-center min-h-screen ">
         <div className="container flex-grow mx-auto max-w-[1300px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10">
-          <div className="mx-auto px-5 lg:px-5">
-            <h2 className="pt-3 text-2xl font-bold lg:pt-0">{product!.name}</h2>
+          <div className="mx-auto px-5 lg:px-5 bg-slate-0">
+            <h2 className="pt-3 text-3xl font-bold lg:pt-0">{product!.name}</h2>
            
             <p className="mt-5 font-bold">
               Availability: {product!.postedAtDate ? (<span className="text-green-600">Seller recently posted</span>) : (<span className="text-red-600">Might not have it</span>)}
             </p>
             <p className="font-bold">Category: <span className="font-normal">{product!.category}</span></p>
             <p className="mt-4 text-4xl font-bold text-violet-900">{product!.price} SEK</p>
-            <p className="pt-5 text-sm leading-5 text-gray-500">{product!.description}</p>
+            <p className="pt-5 font-bold text-sm leading-5">Seller opinion: <span className="font-normal">{product!.description}</span></p>
 
             <div className="mt-7 flex flex-row items-center gap-6">
               <button className="btn">

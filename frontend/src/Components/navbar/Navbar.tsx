@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    
     const navigate = useNavigate();
 
     const handleKeyDown = (e: any) => {

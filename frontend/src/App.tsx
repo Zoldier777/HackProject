@@ -4,14 +4,20 @@ import ProductGallery from './Components/productgalley/Productgallery'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './Components/navbar/Navbar'
 import ProductDetail from './Components/productdetail/ProductDetail'
-import { useState } from 'react'
 import Register from './Components/register/Register'
 import Login from './Components/login/Login'
-
+import { useEffect, useState } from 'react'
+import ProductRegister from './Components/ProductRegister'
 
 const queryClient = new QueryClient()
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
 
 function App() {
+
 
   return (
     <>
@@ -25,6 +31,8 @@ function App() {
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/register" element={<Register/>} />
+              <Route path="/registerproduct" element={<ProductRegister/>} />
+              
             </Route>
           </Routes>
         </BrowserRouter>
