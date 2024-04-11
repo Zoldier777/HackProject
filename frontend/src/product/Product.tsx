@@ -13,7 +13,7 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
             <div className="card-body">
                 <h2 className="card-title flex justify-between">
                     <div>{name}</div>
-                    <h6 className="pr-2">{price} SEK</h6>
+                    <h6>{price} SEK</h6>
                 </h2>
                 {isNew && <div className="badge badge-secondary absolute top-0 right-0">NEW</div>}
                 <div className="card-actions justify-between py-2">
