@@ -4,6 +4,8 @@ namespace Api.Services;
 
 public interface IUserService
 {
-    Task<User> CreateUser(User user);
-    Task<User?> GetUserByEmail(string email);
+    User CreateUser(User user);
+    User? GetUserByEmail(string email);
+
+    User? GetUserById(int id);
 }

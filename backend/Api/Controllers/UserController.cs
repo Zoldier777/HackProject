@@ -7,28 +7,29 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService service) : ControllerBase
+    public class UserController(IUserService service, JWTservice jwtservice) : ControllerBase
     {
-        // POST: api/Product
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost("register")]
-        public async Task<ActionResult<User>> PostUser(RegisterDto dto)
+        public IActionResult CreateUser(RegisterDto dto)
         {
+            if (service.GetUserByEmail(dto.Email) != null)
+            {
+                return BadRequest( new {message = "invalid credentials"});
+            }
             var user = new User
             {
                 Name = dto.Name,
                 Email = dto.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
-            }
-                
-            var User =  await service.CreateUser(user);
+            };
             return Created("success", service.CreateUser(user));
 
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login (LoginDto dto)
+        public IActionResult LoginUser (LoginDto dto)
         {
-            var user = await service.GetUserByEmail(dto.Email);
+            var user = service.GetUserByEmail(dto.Email);
 
             if (user == null) return BadRequest( new {message = "invalid credentials"});
 
@@ -37,7 +38,43 @@ namespace Api.Controllers
                 return BadRequest( new {message = "invalid credentials"});
             }
 
-            return Ok(user);
+            var jwt = jwtservice.Generate(user.Id);
+
+            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            {
+                HttpOnly = true 
+            });
+
+            
+            return Ok( new { message = "success" });
+        }
+        
+        [HttpGet("user")]
+        public IActionResult GetUser ()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = jwtservice.Verify(jwt);
+
+                int userId = int.Parse(token.Issuer);
+
+                var user =  service.GetUserById(userId);
+
+               return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpPost("logout")]
+        public IActionResult UserLogout()
+        {
+            Response.Cookies.Delete("jwt");
+            return Ok(new {message = "success" });
         }
 
        

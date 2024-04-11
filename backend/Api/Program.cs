@@ -1,5 +1,6 @@
 using Api.Data;
 using Api.Services;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<JWTservice>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,9 +18,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseCors(corsPolicyBuilder => corsPolicyBuilder
-    .AllowAnyOrigin()
+    .WithOrigins(new []{"http://localhost:5173"})
     .AllowAnyMethod()
-    .AllowAnyHeader());
+    .AllowAnyHeader()
+    .AllowCredentials());
+    
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

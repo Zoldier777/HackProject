@@ -6,16 +6,21 @@ namespace Api.Services;
 
 public class UserService(AppDbContext context) : IUserService
 {
-    public async Task<User> CreateUser(User user)
+    public User CreateUser(User user)
     {
         context.Users.Add(user);
-        user.Id = await context.SaveChangesAsync();
+        user.Id = context.SaveChanges();
 
         return user;
     }
 
-    public Task<User?> GetUserByEmail(string email)
+    public User? GetUserByEmail(string email)
     {
-        return context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        return context.Users.FirstOrDefault(u => u.Email == email);
+    }
+
+    public User? GetUserById(int id)
+    {
+        return context.Users.FirstOrDefault(u => u.Id == id);
     }
 }
