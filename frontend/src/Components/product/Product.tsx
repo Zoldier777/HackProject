@@ -8,9 +8,11 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
     const isNew = timeDifference < 600000;
 
     return (
-        <Link to={`/product/${id}`} className="product-link">
+        
         <div className="card w-96 glass shadow-xl">
+            <Link to={`/product/${id}`}>
             <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!" /></figure>
+            </Link>
             <div className="card-body">
                 <div className="card-title flex justify-between">
                     <div>{name}</div>
@@ -27,7 +29,7 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
                 </div>
             </div>
         </div>
-        </Link>
+        
     );
 };
 

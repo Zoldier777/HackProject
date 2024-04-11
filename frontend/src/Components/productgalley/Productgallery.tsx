@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Product from "../product/Product";
 import Footer from "../../Footer";
+import { useParams } from "react-router-dom";
 
 const ProductGallery = () => {
   const [pageOffset, setPageOffset] = useState<number>(0);
