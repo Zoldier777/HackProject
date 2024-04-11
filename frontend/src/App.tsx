@@ -1,6 +1,6 @@
 
 import Footer from './Footer'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ProductGallery from './productgalley/Productgallery'
 
 
