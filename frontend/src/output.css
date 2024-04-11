@@ -2194,6 +2194,10 @@ html {
   max-width: 1300px;
 }
 
+.max-w-6xl {
+  max-width: 72rem;
+}
+
 .flex-initial {
   flex: 0 1 auto;
 }
@@ -2246,6 +2250,10 @@ html {
   align-items: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -2282,6 +2290,10 @@ html {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded {
