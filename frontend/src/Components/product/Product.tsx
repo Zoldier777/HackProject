@@ -20,7 +20,7 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
                 {isNew && <div className="badge badge-secondary absolute top-0 right-0">NEW</div>}
                 <div className="card-actions justify-between py-2">
                     <div className="card-actions grid grid-cols-2 gap-2">
-                        <div className="badge badge-outline">{category}</div>
+                        <div className={`badge badge-outline ${category.length > 10 ? 'col-span-2' : ''}`}>{category}</div>
                         {price < 200 ? <div className="badge badge-outline">Cheap</div> : null}
                         <div className="badge badge-outline">{condition}</div>
                     </div>
