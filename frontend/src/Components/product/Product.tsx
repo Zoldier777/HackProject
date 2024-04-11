@@ -10,9 +10,8 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
     return (
         
         <div className="card w-96 glass shadow-xl">
-            <Link to={`/product/${id}`}>
+            
             <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!" /></figure>
-            </Link>
             <div className="card-body">
                 <div className="card-title flex justify-between">
                     <div>{name}</div>
@@ -25,7 +24,9 @@ const Product = ({id, name, price, description, condition,category, postedAtDate
                         {price < 200 ? <div className="badge badge-outline">Cheap</div> : null}
                         <div className="badge badge-outline">{condition}</div>
                     </div>
-                    <button className="btn btn-primary">Buy now!</button>
+                    <Link to={`/product/${id}`}>
+                    <button className="btn btn-primary">View Product</button>
+                    </Link>
                 </div>
             </div>
         </div>

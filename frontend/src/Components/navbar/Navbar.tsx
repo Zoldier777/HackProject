@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -16,7 +16,9 @@ const Navbar = () => {
         <>
             <div className="navbar bg-base-100 drop-shadow gap-1 justify-between sticky top-0 z-50">
                 <div className="flex-initial">
+                    <Link to={'/search'}>
                     <a className="btn btn-ghost text-xl">MarketSafe</a>
+                    </Link>
                 </div>
                 <div className="flex-grow form-control">
                     <input 
