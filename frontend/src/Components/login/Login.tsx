@@ -1,4 +1,4 @@
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 type FormData = {
@@ -6,11 +6,20 @@ type FormData = {
   password: string;
 }
 
-const Login = () => {
+type LoginProps = {
+  IsLoggedIn: boolean
+  setIsLoggedIn: (value: boolean) => void;
+}
+
+const Login = ({ setIsLoggedIn, IsLoggedIn }: LoginProps) => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const navigate = useNavigate();
-  
 
+  if (IsLoggedIn) {
+    navigate("/search");
+  }
+
+  
   const onSubmit = async (data: FormData) => {
     reset()
     try {
@@ -22,7 +31,8 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-            navigate("/search");
+        setIsLoggedIn(true); 
+        navigate("/search");
       }
     } catch (error) {
       console.error('Error logging in:', error);

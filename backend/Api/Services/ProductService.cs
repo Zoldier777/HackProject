@@ -18,7 +18,7 @@ public class ProductService(AppDbContext context) : IProductService
             return prod;
         }
         var products = await context.Product
-            .OrderBy(p => p.PostedAtDate) 
+            .OrderByDescending(p => p.PostedAtDate) 
             .Skip(offset) 
             .Take(number) 
             .ToListAsync();
@@ -41,7 +41,7 @@ public class ProductService(AppDbContext context) : IProductService
     }
 
 
-    public async Task<Product> CreateProduct(string name, string description, int price, string condition,string category)
+    public async Task<Product> CreateProduct(string name, string description, int price, string condition,string category, User user)
     {
         var product = new Product
         {
@@ -49,11 +49,12 @@ public class ProductService(AppDbContext context) : IProductService
             Description = description,
             Price = price,
             Condition = condition,
-            Category = category
+            Category = category,
+            user = user
         };
 
-        context.Product.Add(product); // Add the product to the DbSet
-        await context.SaveChangesAsync(); // Save changes to the database
+        context.Product.Add(product);
+        await context.SaveChangesAsync(); 
 
         return product;
     }

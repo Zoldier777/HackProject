@@ -1,3 +1,4 @@
+using Api.Dtos;
 using Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -6,7 +7,7 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(IProductService service) : ControllerBase
+    public class ProductController(IProductService service, IUserService service2, JWTservice jwtservice) : ControllerBase
     {
         // GET: api/Product
         [HttpGet]
@@ -34,9 +35,35 @@ namespace Api.Controllers
 
             return Ok(product);
         }
+        
+        // POST: api/Product
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(ProductDto dto)
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = jwtservice.Verify(jwt);
+
+                int userId = int.Parse(token.Issuer);
+                
+                var user =  service2.GetUserById(userId);
+                
+                var product =  await service.CreateProduct(dto.Name, dto.Description, dto.Price, dto.Condition, dto.Category, user);
+                
+                return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+                    
+            }
+            catch (Exception e)
+            {
+                return Unauthorized(e.Message);
+            }
+            
+        }
         /*
         // PUT: api/Product/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -66,16 +93,7 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Product
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            context.Product.Add(product);
-            await context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        }
+        
 
         // DELETE: api/Product/5
         [HttpDelete("{id}")]

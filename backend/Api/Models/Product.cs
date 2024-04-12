@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Models;
 
@@ -12,4 +13,8 @@ public class Product
     public required string Condition { get; set; }
     public required string Category { get; set; }
     public DateTime PostedAtDate { get; set; } = DateTime.Now;
+    
+    // Navigation property
+    [JsonIgnore]
+    public User user { get; set; }
 }

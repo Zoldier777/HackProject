@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+
+
+
 type FormData = {
   name: string;
-  email: string;
-  password: string;
   price: number;
   description: string;
   condition: 'mint' | 'used';
   category: 'electronics' | 'clothing' | 'sports';
 };
 
-const Register = () => {
+type RegiseterProps = {
+    IsLoggedIn: boolean
+  }
+
+const Register = ({IsLoggedIn}: RegiseterProps) => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!IsLoggedIn) {
+      navigate("/login");
+    }
+  }, []);
 
   const onSubmit = async (data: FormData) => {
     reset();
     try {
-      const response = await fetch('http://localhost:5180/api/User/register', {
+      const response = await fetch('http://localhost:5180/api/Product', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -27,8 +38,10 @@ const Register = () => {
       });
 
       if (response.status === 201) {
+        
         console.log('Item added successfully');
-        return navigate('/login');
+
+        return navigate(`/search`);
       }
     } catch (error) {
       console.error('Error adding item:', error);
@@ -57,21 +70,6 @@ const Register = () => {
                 placeholder="Item"
               />
             </div>
-
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                {...register('email', { required: true })}
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-6 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-xl"
-                placeholder="Email address"
-              />
-            </div>  
 
             <div>
               <label htmlFor="price" className="sr-only">

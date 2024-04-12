@@ -48,7 +48,7 @@ const ProductGallery = () => {
     <div className="h-screen flex flex-col justify-between">
       <section className="w-full">
         <div className="flex flex-col items-center justify-center h-full">
-          <h1 className="text-4xl font-bold text-dark py-4">Product Gallery</h1>
+          <h1 className="text-4xl font-bold text-dark py-4">Product Catalog</h1>
           {renderProducts()}
         </div>
       </section>
