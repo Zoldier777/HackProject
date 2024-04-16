@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 
-
-
 type FormData = {
   name: string;
   price: number;
@@ -15,9 +13,10 @@ type FormData = {
 
 type RegiseterProps = {
     IsLoggedIn: boolean
-  }
+    setIsLoggedIn: (value: boolean) => void;
+}
 
-const Register = ({IsLoggedIn}: RegiseterProps) => {
+const Register = ({IsLoggedIn, setIsLoggedIn}: RegiseterProps) => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const navigate = useNavigate();
 
@@ -38,13 +37,18 @@ const Register = ({IsLoggedIn}: RegiseterProps) => {
       });
 
       if (response.status === 201) {
-        
+
         console.log('Item added successfully');
 
         return navigate(`/search`);
       }
+      if (response.status === 401) {
+        setIsLoggedIn(false);
+        navigate("/login");
+
+      }
     } catch (error) {
-      console.error('Error adding item:', error);
+        
     }
   };
 

@@ -29,10 +29,10 @@ function App() {
           console.log(response);
           setIsLoggedIn(true);
         } else {
-          console.error('Error fetching user data:', response.statusText);
+          // console.error('Error fetching user data:', response.statusText);
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        // console.error('Error fetching user data:', error);
       }
     };
     fetchUserData();
@@ -49,7 +49,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={isLoggedIn} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/registerproduct" element={<ProductRegister IsLoggedIn={isLoggedIn} />} />
+            <Route path="/registerproduct" element={<ProductRegister setIsLoggedIn={setIsLoggedIn}IsLoggedIn={isLoggedIn} />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
